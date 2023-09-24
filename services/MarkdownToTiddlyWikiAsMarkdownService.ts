@@ -91,6 +91,18 @@ export function convertMarkdownToTiddlyWikiMarkdown(text: string): string {
     //twText = text.replace(regex, '<a href="file:$2" target="_blank">$1</a>');
     twText = text.replace(regex, '<a href="file:$2" target="_blank">$1</a>');
 
+
+
+    // Handle [[blah1\|blah2]]
+	twText = twText.replace(/\[\[([^\]]+)\\\|(.*?)\]\]/g, '[[$2\\|$1]]');
+
+    // Handle [[blah1|blah2]]
+	twText = twText.replace(/\[\[([^\]]+[^\\])\|(.*?)\]\]/g, '[[$2|$1]]');
+
+
+
+    return twText;
+    // ********** Is this necessary? Let's skip it and see what happens *****
 	// Replace ONLY Links surrounded by [[ and ]]
 	twText = twText.replace(/\[\[([^\]]+)\]\]/g, (match, p1) => {
 		const linkRegex = /((?:[^\[\]|\\]|\\.)+)(?:\|((?:[^\[\]|\\]|\\.)+))?/;
