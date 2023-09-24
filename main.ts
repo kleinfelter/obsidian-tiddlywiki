@@ -1,8 +1,8 @@
 import { App, Plugin, PluginSettingTab, Setting, Notice } from 'obsidian';
 import * as path from 'path';
 import { convertJSONToTiddlers, convertTiddlersToObsidianMarkdown, writeObsidianMarkdownFiles } from 'services/TiddlyWikiToMarkdownService';
-
 import { exportAllMarkdownFilesToJSON } from 'services/MarkdownToTiddlyWikiService';
+import { exportAllMarkdownFilesToJSONAsMarkdown } from 'services/MarkdownToTiddlyWikiAsMarkdownService';
 import { downloadJsonAsFile } from 'utils/downloadJsonAsFile';
 
 export default class ObsidianTiddlyWikiPlugin extends Plugin {
@@ -76,7 +76,7 @@ class SampleSettingTab extends PluginSettingTab {
 			.setName('Export JSON')
 			.setDesc('To import in TiddlyWiki : Tools->Import')
 			.addButton(button => button
-				.setButtonText("Export .json").onClick(async () => {
+				.setButtonText("Export .json as Wikitext").onClick(async () => {
 					//@ts-ignore
 					const basePath = this.app.vault.adapter.basePath
 
@@ -85,6 +85,19 @@ class SampleSettingTab extends PluginSettingTab {
 					downloadJsonAsFile(jsonExport, "test.json")
 				}))
 
+
+		new Setting(containerEl)
+			.setName('Export JSON as Markdown')
+			.setDesc('To import in TiddlyWiki : Tools->Import')
+			.addButton(button => button
+				.setButtonText("Export .json as Markdown").onClick(async () => {
+					//@ts-ignore
+					const basePath = this.app.vault.adapter.basePath
+
+					const jsonExport = await exportAllMarkdownFilesToJSONAsMarkdown(basePath)
+
+					downloadJsonAsFile(jsonExport, "test.json")
+				}))
 	}
 }
 

@@ -1,10 +1,10 @@
 {
 	"id": "tiddlywiki-import-export",
-	"name": "Import/Export TiddlyWiki",
-	"version": "1.0.3",
+	"name": "Import/Export TiddlyWiki (kpk)",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Import and export TiddlyWiki from and to Obsidian.",
-	"author": "Lucas Bordeau",
+	"author": "Lucas Bordeau (kpk)",
 	"authorUrl": "https://github.com/lucasbordeau",
 	"fundingUrl": "https://www.buymeacoffee.com/lucasbordeau",
 	"isDesktopOnly": true
