@@ -21,10 +21,16 @@ Import and export from TiddlyWiki with JSON files.
 
 ## Known Defects
 
-* SEV1: Obsidian uses `[[filename|Name_to_render]]` and TW Markdown uses `[[Name_to_render|tiddler_name]]`. I need to reverse those pieces when exporting.
 * SEV3: It exports the "created" and "modified" fields in this format: "2023-09-24T03:47:47.002Z" and TW expects this format: "20230924hhmm00000"
   * Note that hours is GMT and Washington is 7 hours behind (in the summer). Unless you add 7 (or 8) hours, TW will display a day earlier than created/modified.
   * See https://tiddlywiki.com/static/DateFormat.html
   * But the exporter just uses the date of the export, not the Obsidian document's dates, so you'll need to get the underlying file's timestamps.
 
 * SEV4: Obsidian allows you to escape the vertical bar of `[[filename\|Name_to_render]]` everywhere. TW only allows it in a table cell. You need to use it in a table cell when your name_to_render doesn't match the filename, because the table processor will "consume" the bar to format the table.  Solution: Behavioral -- Don't escape the vertical bar except in table cells.
+
+
+
+## Fixed Defects
+
+* 2023.09.24 - SEV1: Obsidian uses `[[filename|Name_to_render]]` and TW Markdown uses `[[Name_to_render|tiddler_name]]`. I need to reverse those pieces when exporting.
+
